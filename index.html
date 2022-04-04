@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Оформление заказа</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=d7f796e6-b982-4f3a-9dae-e214d0513617&lang=ru_RU" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+<script defer="defer" src="./assets/scripts/main.js"></script><link href="./assets/styles/main..css" rel="stylesheet"></head>
+<body>
+
+    <main>
+       <section class="ordering">
+           <div class="container">
+                <form id="ordering-form" class="ordering__form-wrap">
+
+                   <div class="ordering__form-wrap__container">
+                    <input required type="text" placeholder="Телефон" name="phone" class="ordering__form-wrap__text-input">
+                   </div>
+
+                   <div class="ordering__form-wrap__container">
+                    <input required type="text" placeholder="Город" name="city" class="ordering__form-wrap__text-input">
+                   </div>
+
+                   <div class="ordering__form-wrap__container shipment-type">
+                        <h2 class="ordering__form-wrap__container__header">способ доставки</h2>
+                       <label class="ordering__form-wrap__label">
+                           <input type="radio" checked="checked" name="shipment" value="pickup" class="ordering__form-wrap__radio">
+                           <div class="custom-radio"></div>
+                           Самовывоз
+                       </label>
+                       <label class="ordering__form-wrap__label">
+                            <input type="radio" name="shipment" value="shipment" class="ordering__form-wrap__radio">
+                           <div class="custom-radio"></div>
+                           курьерская доставка
+                        </label>
+
+                        <div class="shipment-type__wrap">
+
+                            <div class="shipment-type__content" data-content="pickup">
+                                <div class="ordering__form-wrap__container">
+                                    <a class="btn btn-lg btn-primary ordering__form-wrap__btn pick-up-popup-trigger">выбрать пункт самовывоза</a>
+                                </div>
+                                <div class="ordering__form-wrap__container__point">
+                                    <span class="ordering__form-wrap__container__point__main-head">пункт самовывоза</span>
+                                    <span class="ordering__form-wrap__container__point__head">пункт самовывоза 1</span>
+                                    <span class="ordering__form-wrap__container__text">Заневский пр-т, д. 38 (метро Ладожская, Новочеркасская)</span>
+                                    <a href="" class="ordering__form-wrap__container__point__link pick-up-popup-trigger">изменить пункт</a>
+                                </div>
+                            </div>
+
+                            <div class="shipment-type__content" data-content="shipment" style="display: none;">
+                                <h2 class="ordering__form-wrap__container__header">Адрес</h2>
+                                <div class="shipment-type__content__group">
+                                    <input type="text" placeholder="улица" name="street" class="ordering__form-wrap__text-input shipment-type__content__input">
+                                    <input type="text" placeholder="Дом" name="house" class="ordering__form-wrap__text-input" style="width: 48%;">
+                                    <input type="text" placeholder="Квартира" name="flat" class="ordering__form-wrap__text-input" style="width: 48%;">
+                                </div>
+                                
+                                <div class="shipment-type__content__label-wrap">
+                                    <label class="ordering__form-wrap__label">
+                                        <input type="radio" name="shipment-type" value="В течении выбранного часа, с примеркой" class="ordering__form-wrap__radio">
+                                       <div class="custom-radio"></div>
+                                       В течении выбранного часа, с примеркой
+                                    </label>
+                                    <span>Доставка бесплатная при онлайн оплате. Иначе стоимость доставки - 299 руб.</span>
+                                    <span>Ближайшая дата доставки: 26 марта</span>
+                                </div>
+                                <div class="shipment-type__content__label-wrap">
+                                    <label class="ordering__form-wrap__label">
+                                        <input type="radio" name="shipment-type" value="С примеркой" class="ordering__form-wrap__radio">
+                                       <div class="custom-radio"></div>
+                                       С примеркой
+                                    </label>
+                                    <span>Доставка бесплатная вне зависимости от суммы покупки.</span>
+                                    <span>Ближайшая дата доставки: 25 марта</span>
+                                </div>
+                                <div class="shipment-type__content__label-wrap">
+                                    <label class="ordering__form-wrap__label">
+                                        <input type="radio" name="shipment-type" value="Без примерки" class="ordering__form-wrap__radio">
+                                       <div class="custom-radio"></div>
+                                       Без примерки
+                                    </label>
+                                    <span>Без возможности отказаться от части товаров. Доставка бесплатная вне зависимости от суммы покупки.</span>
+                                    <span>Ближайшая дата доставки: 26 марта</span>
+                                </div>
+                                <div class="shipment-type__content__label-wrap">
+                                    <label class="ordering__form-wrap__label">
+                                        <input type="radio" name="shipment-type" value="В течении выбранных 15 минут, с примеркой" class="ordering__form-wrap__radio">
+                                       <div class="custom-radio"></div>
+                                       В течении выбранных 15 минут, с примеркой
+                                    </label>
+                                    <span>Стоимость доставки - 500 руб., вне зависимости от суммы покупки.</span>
+                                    <span>Ближайшая дата доставки: 26 марта</span>
+                                </div>
+                                
+                                <div class="shipment-type__time-box">
+                                    <h2 class="ordering__form-wrap__container__header">Время доставки</h2>
+                                    <div class="shipment-type__time-box__wrap">
+                                        
+                                        <div class="custom-select ordering__form-select" data-select-type="orientation" data-select>
+                                            <span class="custom-select__placeholder">Удобный для вас день</span>
+                                            <button class="custom-select__button" type="button" aria-label="Выберите одну из опций">
+                                                <span class="custom-select__text"></span>
+                                                <span class="custom-select__icon"></span>
+                                            </button>
+                                          <ul class="custom-select__list" role="listbox">
+                                            <li class="custom-select__item" tabindex="0" data-select-value="пятница, 26 марта" aria-selected="false" role="option">пятница, 26 марта</li>
+                                            <li class="custom-select__item" tabindex="0" data-select-value="суббота, 27 марта" aria-selected="false" role="option">суббота, 27 марта</li>
+                                            <li class="custom-select__item" tabindex="0" data-select-value="воскресенье, 28 марта" aria-selected="false" role="option">воскресенье, 28 марта</li>
+                                            <li class="custom-select__item" tabindex="0" data-select-value="понедельник, 29 марта" aria-selected="false" role="option">понедельник, 29 марта</li>
+                                          </ul>
+                                        </div>
+
+                                        <div class="custom-select ordering__form-select" data-select-type="orientation" data-select>
+                                            <span class="custom-select__placeholder">Удобное для вас время</span>
+                                          <button class="custom-select__button" type="button" aria-label="Выберите одну из опций"><span class="custom-select__text"></span><span class="custom-select__icon"></span></button>
+                                          <ul class="custom-select__list" role="listbox">
+                                            <li class="custom-select__item" tabindex="0" data-select-value="10:00 - 11:00" aria-selected="false" role="option">10:00 - 11:00</li>
+                                            <li class="custom-select__item" tabindex="0" data-select-value="10:00 - 11:00" aria-selected="false" role="option">10:00 - 11:00</li>
+                                            <li class="custom-select__item" tabindex="0" data-select-value="10:00 - 11:00" aria-selected="false" role="option">10:00 - 11:00</li>
+                                            <li class="custom-select__item" tabindex="0" data-select-value="10:00 - 11:00" aria-selected="false" role="option">10:00 - 11:00</li>
+                                          </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+
+                   
+
+                   <div class="ordering__form-wrap__container">
+                    <input type="text" placeholder="Имя" name="name" class="ordering__form-wrap__text-input">
+                   </div>
+
+                   <div class="ordering__form-wrap__container">
+                    <input type="text" placeholder="Фамилия" name="surname" class="ordering__form-wrap__text-input">
+                   </div>
+
+                   <div class="ordering__form-wrap__container">
+                    <input type="email" placeholder="Электронная почта" name="email" class="ordering__form-wrap__text-input">
+                    <label class="ordering__form-wrap__label _small">
+                        <input type="checkbox" class="ordering__form-wrap__check">
+                        <div class="custom-check"></div>
+                        подписаться на рассылку
+                    </label>
+                   </div>
+
+                   <div class="ordering__form-wrap__container">
+                       <textarea placeholder="Комментарий" name="commentary" id="" cols="auto" rows="3" class="ordering__form-wrap____textarea ordering__form-wrap__text-input"></textarea>
+                   </div>
+
+                   <div class="ordering__form-wrap__container">
+                       <span class="cost">3 товара на сумму 15 390 ₽ </span>
+                   </div>
+
+                   <div class="ordering__form-wrap__container payment-type">
+                    <h2 class="ordering__form-wrap__container__header">Выберите способ оплаты</h2>
+                    <label class="ordering__form-wrap__label">
+                        <input type="radio" name="payment" class="ordering__form-wrap__radio">
+                           <div class="custom-radio"></div>
+                           Оплата банковской картой
+                    </label>
+                    <label class="ordering__form-wrap__label">
+                         <input type="radio" name="payment" class="ordering__form-wrap__radio">
+                           <div class="custom-radio"></div>
+                           Оплата наличными при получении
+                     </label>
+                    </div>
+
+                    <div class="ordering__form-wrap__submit-container">
+                        <button class="btn btn-lg btn-primary ordering__form-wrap__btn" type="submit">оформить заказ</button>
+                        <span class="ordering__form-wrap__submit-container__text">
+                            Нажимая на кнопку, я подтверждаю, что согласен на обработку моих персональных данных, а также с <a href="">Пользовательским соглашением</a>                         
+                        </span>
+                    </div>
+                </form>
+
+               <div class="ordering__info-wrap">
+                   <span class="ordering__info-wrap__text">
+                    стоимость и срок доставки определиться после выбора способа доставки <br><br>
+                    Вам доступна бесплатная курьерская доставка от 6000 руб. Доставка в пункты выдачи бесплатно.
+                   </span>
+                   <a href="" class="ordering__info-wrap__link">подробнее</a>
+                   <span class="ordering__info-wrap__text">
+                    Перед покупкой Вы можете померить вещь. Покупайте только то, что Вам подошло. <br><br>
+                    30-дневный период возврата товара, комиссия за возврат и возврат стоимости за неотправленный товар. Прочитать о возврате и возмещении стоимости товара. 
+                   </span>
+                   <a href="" class="ordering__info-wrap__link">подробнее</a>
+                    <div class="ordering__info-wrap__container">
+                        <span class="ordering__info-wrap__text">Мы принимаем:</span>
+                        <img src="assets/img/visa..svg" alt="" class="ordering__info-wrap__container__img">
+                        <img src="assets/img/mir..svg" alt="" class="ordering__info-wrap__container__img">
+                        <img src="assets/img/mastercard..svg" alt="" class="ordering__info-wrap__container__img">
+                        <img src="assets/img/maestro..svg" alt="" class="ordering__info-wrap__container__img">
+                        <img src="assets/img/qiwi..svg" alt="" class="ordering__info-wrap__container__img">
+                        <img src="assets/img/googlePay..svg" alt="" class="ordering__info-wrap__container__img">
+                    </div>
+               </div>
+           </div>
+       </section>
+
+       <div id="pick-map" class="pickup-popup__wrap" style="display: none;">
+            <div class="pickup-popup">
+                <div class="pickup-popup__wrapper">
+                    <h2 class="pickup-popup__header">Пункты самовывоза</h2>
+                    <ul class="pickup-popup__list">
+                        <li class="pickup-popup__list__item">
+                            <h3 class="pickup-popup__list__item__header">пункт самовывоза 1</h3>
+                            <span class="pickup-popup__list__item__text _addres">
+                                Заневский пр-т, д. 38 (метро Ладожская, Новочеркасская) <br><br>
+                            </span>
+                            <span class="pickup-popup__list__item__text">
+                                Время работы: <br>
+                                пн-вс: 10:00-21:00
+                            </span>
+                            <span class="pickup-popup__list__item__desc">срок доставки с 25.03.2021 по 27.03.2021</span>
+                        </li>
+                        <li class="pickup-popup__list__item">
+                            <h3 class="pickup-popup__list__item__header">пункт самовывоза 2</h3>
+                            <span class="pickup-popup__list__item__text _addres">
+                                Занененевский пр-т, д. 38 (метро Ладожская, Новочеркасская) <br><br>
+                            </span>
+                            <span class="pickup-popup__list__item__text">
+                                Время работы: <br>
+                                пн-вс: 10:00-21:00
+                            </span>
+                            <span class="pickup-popup__list__item__desc">срок доставки с 25.03.2021 по 27.03.2021</span>
+                        </li>
+                        <li class="pickup-popup__list__item">
+                            <h3 class="pickup-popup__list__item__header">пункт самовывоза 1</h3>
+                            <span class="pickup-popup__list__item__text _addres">
+                                Заневский пр-т, д. 38 (метро Ладожская, Новочеркасская) <br><br>
+                            </span>
+                            <span class="pickup-popup__list__item__text">
+                                Время работы: <br>
+                                пн-вс: 10:00-21:00
+                            </span>
+                            <span class="pickup-popup__list__item__desc">срок доставки с 25.03.2021 по 27.03.2021</span>
+                        </li>
+                        <li class="pickup-popup__list__item">
+                            <h3 class="pickup-popup__list__item__header">пункт самовывоза 1</h3>
+                            <span class="pickup-popup__list__item__text _addres">
+                                Заневский пр-т, д. 38 (метро Ладожская, Новочеркасская) <br><br>
+                            </span>
+                            <span class="pickup-popup__list__item__text">
+                                Время работы: <br>
+                                пн-вс: 10:00-21:00
+                            </span>
+                            <span class="pickup-popup__list__item__desc">срок доставки с 25.03.2021 по 27.03.2021</span>
+                        </li>
+                        <li class="pickup-popup__list__item">
+                            <h3 class="pickup-popup__list__item__header">пункт самовывоза 1</h3>
+                            <span class="pickup-popup__list__item__text _addres">
+                                Заневский пр-т, д. 38 (метро Ладожская, Новочеркасская) <br><br>
+                            </span>
+                            <span class="pickup-popup__list__item__text">
+                                Время работы: <br>
+                                пн-вс: 10:00-21:00
+                            </span>
+                            <span class="pickup-popup__list__item__desc">срок доставки с 25.03.2021 по 27.03.2021</span>
+                        </li>
+                        <li class="pickup-popup__list__item">
+                            <h3 class="pickup-popup__list__item__header">пункт самовывоза 1</h3>
+                            <span class="pickup-popup__list__item__text _addres">
+                                Заневский пр-т, д. 38 (метро Ладожская, Новочеркасская) <br><br>
+                            </span>
+                            <span class="pickup-popup__list__item__text">
+                                Время работы: <br>
+                                пн-вс: 10:00-21:00
+                            </span>
+                            <span class="pickup-popup__list__item__desc">срок доставки с 25.03.2021 по 27.03.2021</span>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="pickup-popup__map" id="pickup-map" style="width: 1020px; height: 700px"></div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
