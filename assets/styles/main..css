@@ -889,7 +889,8 @@ table {
 
 .ordering__form-wrap__container .ordering__form-wrap__btn {
   margin-bottom: 20px;
-  display: block; }
+  display: block;
+  box-sizing: border-box; }
 
 .ordering__form-wrap__submit-container {
   display: flex;
@@ -1171,6 +1172,16 @@ table {
   color: #000000;
   text-align: left;
   display: block; }
+
+@media screen and (max-width: 900px) {
+  .pickup-popup {
+    flex-direction: column-reverse; }
+  #pickup-map {
+    width: 100% !important;
+    margin-bottom: 10px;
+    height: 400px !important; }
+  .pickup-popup .pickup-popup__wrapper {
+    max-width: 100%; } }
 
 
 /*# sourceMappingURL=main..css.map*/
